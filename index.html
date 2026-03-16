@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P 坦克大战</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="join-screen" class="screen active">
+    <div class="container join-container">
+        <button id="help-btn" class="help-btn">?</button>
+		<button id="sound-toggle" title="静音">🔊</button>
+        <div class="game-title">🎮 坦克大战</div>
+        <div class="game-subtitle">P2P 多人对战 · 缩圈大逃杀模式</div>
+        <div id="loading-progress" class="loading-progress">加载资源中... 0%</div>
+        <div id="join-form" style="display:none">
+            <div class="input-group"><label>👤 你的名称</label><input type="text" id="name-input" placeholder="输入你的名称" maxlength="12"></div>
+            <div class="input-group"><label>🚪 房间号</label><input type="text" id="room-input" placeholder="输入房间号" maxlength="20"></div>
+            <button id="join-btn" class="btn btn-join">加入房间</button>
+            <button id="solo-btn" class="btn btn-solo">🎯 单人训练</button>
+        </div>
+    </div>
+</div>
+
+<div id="help-modal" class="help-modal">
+    <div class="help-content">
+        <button id="help-close" class="help-close">×</button>
+        <div class="help-title">📖 游戏说明</div>
+        <div class="help-section"><h3>🎯 胜利条件</h3><p>成为最后存活的玩家！地图会不断缩小。击败野怪和其他玩家，收集道具和Buff来增强自己。</p></div>
+        <div class="help-section"><h3>🎮 操作说明</h3><ul><li><b>WASD/方向键</b> 移动</li><li><b>鼠标</b> 瞄准</li><li><b>左键/空格 点按</b> 普通射击</li><li><b>左键/空格 长按2秒</b> 蓄力射击</li><li><b>Shift 短按</b> 短距离冲刺（无敌）</li><li><b>Shift 长按</b> 长距离冲刺</li><li><b>数字键1-5</b> 使用道具</li></ul></div>
+        <div class="help-section"><h3>🔫 弹药系统</h3><p>弹药上限10发，自动恢复。长按2秒蓄力发射十字弹团（消耗5发，中心弹伤害x3）。</p></div>
+        <div class="help-section"><h3>⚡ 喷发冲刺</h3><ul><li><b>短按Shift</b>：短距离冲刺，过程中无敌</li><li><b>长按Shift</b>：长距离冲刺</li><li>短冲刺穿过敌方子弹 = 完美闪避，获得⚡反击光芒</li></ul></div>
+        <div class="help-section"><h3>💎 Buff</h3><div class="help-item"><span class="help-icon">❤️</span>生命+5并回满</div><div class="help-item"><span class="help-icon">⚡</span>加快弹药恢复</div><div class="help-item"><span class="help-icon">💨</span>移动速度+10%</div><div class="help-item"><span class="help-icon">🔫</span>增加散射子弹</div></div>
+        <div class="help-section"><h3>📦 道具</h3><div class="help-item"><span class="help-icon">🟤</span>泥浆-减速</div><div class="help-item"><span class="help-icon">💥</span>激光</div><div class="help-item"><span class="help-icon">🍌</span>香蕉皮-滑行</div><div class="help-item"><span class="help-icon">👾</span>召唤野怪</div><div class="help-item"><span class="help-icon">🧲</span>磁铁</div><div class="help-item"><span class="help-icon">💨</span>烟雾弹</div><div class="help-item"><span class="help-icon">🛡️</span>金钟罩</div><div class="help-item"><span class="help-icon">👻</span>隐身</div><div class="help-item"><span class="help-icon">💊</span>回满生命</div></div>
+    </div>
+</div>
+
+<div id="lobby-screen" class="screen">
+    <div class="container lobby-container">
+        <div class="lobby-header"><span id="room-display">房间: ---</span><span id="player-count">玩家: 0/8</span></div>
+        <div id="player-list" class="player-list"></div>
+        <div class="lobby-hint">💡 所有玩家准备后自动开始（至少2人，最多8人）</div>
+        <button id="ready-btn" class="btn btn-ready">准备</button>
+    </div>
+</div>
+
+<div id="game-screen" class="screen"><canvas id="game-canvas"></canvas></div>
+
+<div id="result-screen" class="screen">
+    <div class="container result-container">
+        <div id="result-content"></div>
+        <div class="btn-group">
+            <button id="back-btn" class="btn btn-ready">再来一局</button>
+            <button id="quit-btn" class="btn btn-secondary">退出房间</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
