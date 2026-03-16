@@ -1,5 +1,5 @@
 // 对象池类
-export class Objectpool {
+export class ObjectPool {
     constructor(factory, reset, max = 200) {
         this._pool = []
         this._factory = factory
@@ -19,13 +19,13 @@ export class Objectpool {
 }
 
 // 拖尾池
-export const trailPool = new Objectpool(
+export const trailPool = new ObjectPool(
     () => ({ x: 0, y: 0, life: 0 }),
     (t, x, y, life) => { t.x = x; t.y = y; t.life = life }
 )
 
 // 子弹池
-export const bulletPool = new Objectpool(
+export const bulletPool = new ObjectPool(
     () => ({
         id: '', x: 0, y: 0, vx: 0, vy: 0,
         owner: '', life: 0, dmg: 1,
@@ -35,7 +35,7 @@ export const bulletPool = new Objectpool(
 )
 
 // 爆炸池
-export const explosionPool = new Objectpool(
+export const explosionPool = new ObjectPool(
     () => ({ x: 0, y: 0, life: 0, maxLife: 0 }),
     (e, x, y, life) => { e.x = x; e.y = y; e.life = life; e.maxLife = life }
 )
